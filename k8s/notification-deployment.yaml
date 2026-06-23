@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: notification-service
-          image: ghcr.io/seip/notification-service:latest
+          image: ghcr.io/akash5746/notification-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8085

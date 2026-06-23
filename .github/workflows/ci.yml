@@ -14,7 +14,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_PREFIX: ghcr.io/seip
+  IMAGE_PREFIX: ghcr.io/akash5746
 
 jobs:
   # ─────────────────────────────────────────────
@@ -27,10 +27,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js 20
+      - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
@@ -127,7 +127,7 @@ jobs:
           JWT_SECRET: test-jwt-secret-key-must-be-at-least-64-chars-long-for-testing-use
 
       - name: Publish test results
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: success() || failure()
         with:
           name: Maven Tests
@@ -169,18 +169,18 @@ jobs:
         run: ./mvnw clean package -DskipTests
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Extract Git metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.IMAGE_PREFIX }}/api-gateway
           tags: |
@@ -189,7 +189,7 @@ jobs:
 
       # ── API Gateway ──
       - name: Build & Push API Gateway
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./services/api-gateway
           push: true
@@ -201,7 +201,7 @@ jobs:
 
       # ── Auth Service ──
       - name: Build & Push Auth Service
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./services/auth-service
           push: true
@@ -213,7 +213,7 @@ jobs:
 
       # ── User Service ──
       - name: Build & Push User Service
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./services/user-service
           push: true
@@ -225,7 +225,7 @@ jobs:
 
       # ── Expense Service ──
       - name: Build & Push Expense Service
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./services/expense-service
           push: true
@@ -237,7 +237,7 @@ jobs:
 
       # ── Fraud Service ──
       - name: Build & Push Fraud Service
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./services/fraud-service
           push: true
@@ -263,7 +263,7 @@ jobs:
 
       # ── ML Service ──
       - name: Build & Push ML Service
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./ml-service
           push: true
@@ -281,7 +281,7 @@ jobs:
           path: frontend/dist
 
       - name: Build & Push Frontend
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./frontend
           push: true
