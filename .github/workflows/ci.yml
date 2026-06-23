@@ -5,12 +5,14 @@ on:
     branches:
       - main
       - develop
+      - skypriest
       - 'feature/**'
       - 'hotfix/**'
   pull_request:
     branches:
       - main
       - develop
+      - skypriest
 
 env:
   REGISTRY: ghcr.io
