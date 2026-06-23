@@ -14,7 +14,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_PREFIX: ghcr.io/akash5746
+  IMAGE_PREFIX: ghcr.io/akashpandit55900
 
 jobs:
   # ─────────────────────────────────────────────

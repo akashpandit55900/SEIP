@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: ml-service
-          image: ghcr.io/akash5746/ml-service:latest
+          image: ghcr.io/akashpandit55900/ml-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8088

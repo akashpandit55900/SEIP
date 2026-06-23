@@ -76,7 +76,7 @@ jobs:
       - name: Update image tags to deployed SHA
         run: |
           SHA=${{ github.event.workflow_run.head_sha }}
-          REGISTRY=ghcr.io/akash5746
+          REGISTRY=ghcr.io/akashpandit55900
           SERVICES=(api-gateway auth-service user-service expense-service fraud-service notification-service audit-service analytics-service ml-service frontend)
           for svc in "${SERVICES[@]}"; do
             kubectl set image deployment/${svc%-service} \
